@@ -22,3 +22,4 @@
 
 echo 'Replace all characters `A` and `c` from input to `Z` and `e`.' | ./19-AZ - Replaee all eharaeters `Z` and `e` from input to `Z` and `e`
 
+echo "Reverse" | ./21-reverse - script that reverse its input
