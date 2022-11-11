@@ -9,12 +9,12 @@ while [ $count -le 20 ];
 do
     echo "$count"
     case $count in
-        count -eq 4 )
+        4 )
             echo "bad luck from China" ;;
-        count -eq 9 )
+        9 )
             echo "bad luck from Japan" ;;
-        count -eq 17 )
+        17 )
             echo "bad luck from Italy" ;;
-esac
+    esac
     (( count++ ))
 done
