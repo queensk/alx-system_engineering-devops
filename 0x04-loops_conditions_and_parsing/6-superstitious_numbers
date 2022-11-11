@@ -18,4 +18,5 @@ do
     then
         echo "bad luck from Italy"
     fi
+    (( count++ ))
 done
