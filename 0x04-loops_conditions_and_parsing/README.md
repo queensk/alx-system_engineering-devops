@@ -179,3 +179,27 @@ bad luck from Italy
 20
 root@9918562e7569:/alx-system_engineering-devops/0x04-loops_conditions_and_parsing#
 ```
+
+# Clock
+## 7-clock
+
+> Write a Bash script that displays the time for 12 hours and 59 minutes:
+
+- display hours from 0 to 12
+- display minutes from 1 to 59
+- Requirements:
+
+- You must use the while loop (for and until are forbidden)
+
+# For ls
+## File: 8-for_ls
+
+> Write a Bash script that displays:
+
+> The content of the current directory
+> In a list format
+> Where only the part of the name after the first dash is displayed (refer to the example)
+> Requirements:
+
+> You must use the for loop (while and until are forbidden)
+> Do not display hidden files
