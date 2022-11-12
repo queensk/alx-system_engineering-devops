@@ -51,4 +51,12 @@
 
 > Requirements:
 
-> You cannot use ps
+- You cannot use ps
+
+# 4. To infinity and beyond
+## File: 4-to_infinity_and_beyond
+> Write a Bash script that displays To infinity and beyond indefinitely.
+
+> Requirements:
+
+- In between each iteration of the loop, add a sleep 2
