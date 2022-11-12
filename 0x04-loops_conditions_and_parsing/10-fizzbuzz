@@ -7,13 +7,13 @@ i=0
 
 while [ $i -le 100 ];
 do
-    if [ (( $i%5 )) -eq 0 ] || [ (( i%3 )) -eq 0 ];
+    if [ $(( i%5 )) -eq 0 ] || [ $(( i%3 )) -eq 0 ];
     then
         echo "FizzBuzz"
-    elif [ (($i%5 )) -eq 0];
+    elif [ $(( i%5 )) -eq 0];
     then
         echo "Buzz"
-    elif [ (($i%3))  -eq -];
+    elif [ $(( i%3 ))  -eq -];
     then 
         echo "Fizz"
     else
