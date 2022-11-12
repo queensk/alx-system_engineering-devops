@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Displays the IP and status code of an Apache log file
 
-awk '{ printf "%s %s\n", $1, $9 }' "apache-access.log" | sort -nr | uniq -c | sort -nf
+awk '{ printf "%s %s\n", $1, $9 }' "apache-access.log" | sort -nr | uniq -c | sort -nr
