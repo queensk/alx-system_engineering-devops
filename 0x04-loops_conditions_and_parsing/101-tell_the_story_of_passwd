@@ -5,4 +5,4 @@ IFS=':'
 while read -r user pass uid gid  homedir loginshell;
 do
     each "The user $user is part of the $gid gang, lives in $homedir and rides $loginshell. $uid's place is protected by the passcode $pass, more info about the user here: $username_f"
-done </etc/passwdusername_f
+done </etc/passwd
