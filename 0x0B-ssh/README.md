@@ -65,3 +65,16 @@ It is important to keep your private key secure, and not to share it with anyone
 Also make sure that you have the right permissions to access the directory where the files will be created and to create new files in it.
 
 Also, to use the key pair to connect to remote servers, you'll need to copy the content of the public key (school.pub) file to the authorized_keys file on the remote server.
+
+## Add the SSH public
+
+To add more SSH keys for authorization on an Ubuntu machine, you can follow these steps:
+
+Open the authorized_keys file in a text editor:
+
+```
+nano ~/.ssh/authorized_keys
+```
+
+Add a new line to the file and paste in the additional SSH key(s) you want to add. Each key should be on its own line.
+Save and close the file.
