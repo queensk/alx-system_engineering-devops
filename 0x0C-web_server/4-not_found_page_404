@@ -1,13 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# configures an Nginx server to have a custom 404 page that contains the string 'Ceci n'est pas une page'
 
-# Create the 404.html file
-echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
-
-# Use sed to replace the location block for handling 404 errors
-sed -i '\|error_page 404 /404.html;|a \\tlocation = /404.html { \n\t\tinternal; \n\t}' /etc/nginx/sites-available/default
-
-# Use sed to add a location block for handling 404 errors
-sed -i '\|location / {|a error_page 404 /404.html;' /etc/nginx/sites-available/default
-
-# Restart Nginx to apply changes
-systemctl restart nginx
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo 'Holberton School' > /var/www/html/index.nginx-debian.html
+sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+sed -i '/server_name _;/a error_page 404 /custom_404.html;\nlocation = /custom_404.html {\nroot /usr/share/nginx/html;\ninternal;\n}' /etc/nginx/sites-available/default
+service nginx start
