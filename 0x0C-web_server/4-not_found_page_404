@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Create the 404.html file
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/404.html
+
+# Use sed to replace the location block for handling 404 errors
+sed -i '\|error_page 404 /404.html;|a \\tlocation = /404.html { \n\t\tinternal; \n\t}' /etc/nginx/sites-available/default
+
+# Use sed to add a location block for handling 404 errors
+sed -i '\|location / {|a error_page 404 /404.html;' /etc/nginx/sites-available/default
+
+# Restart Nginx to apply changes
+systemctl restart nginx
