@@ -1,13 +1,38 @@
 #!/usr/bin/env bash
 # Configures a new Ubuntu server with a HAproxy load-balancer
-apt-get -y install software-properties-common
-add-apt-repository -y ppa:vbernat/haproxy-1.8
-apt-get -y update
-apt-get -y install haproxy=1.8.\*
-sed -i '/errorfile 504/a listen thelaura' /etc/haproxy/haproxy.cfg
-sed -i '/listen thelaura/a         bind :80' /etc/haproxy/haproxy.cfg
-sed -i '/bind :80/a         mode http' /etc/haproxy/haproxy.cfg
-sed -i '/mode http/a         server 85739-web-01 204.236.240.97:80 check' /etc/haproxy/haproxy.cfg
-sed -i '/server 85739-web-01 204.236.240.97:80 check/a         server 85739-web-02 54.237.108.98:80 check' /etc/haproxy/haproxy.cfg
-sed -i '/#EXTRAOPTS="-de -m 16"/a ENABLED=1' /etc/default/haproxy
-service haproxy start
+apt-get update
+apt-get install --no-install-recommends software-properties-common
+add-apt-repository ppa:vbernat/haproxy-2.7
+apt-get update
+apt-get install haproxy -y
+echo 'global
+  log /dev/log local0
+  log /dev/log local1 notice
+  chroot /var/lib/haproxy
+  stats socket /run/haproxy/admin.sock mode 660 level admin
+  stats timeout 30s
+  user haproxy
+  group haproxy
+
+defaults
+  log global
+  mode http
+  option httplog
+  option dontlognull
+  timeout connect 5000
+  timeout client 50000
+  timeout server 50000
+
+frontend http-in
+  bind *:80
+  default_backend servers
+
+backend servers
+  balance roundrobin
+  server 85739-web-01 204.236.240.97:80 check
+  server 85739-web-02 54.237.108.98:80 check
+' > /etc/haproxy/haproxy.cfg
+
+# Start HAproxy
+systemctl start haproxy
+systemctl enable haproxy
