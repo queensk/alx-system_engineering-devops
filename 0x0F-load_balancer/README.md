@@ -1,0 +1,7 @@
+# 2-puppet_custom_http_response_header.pp
+
+- A load balancer is a device or software that distributes network traffic across multiple servers to improve the performance and availability of a network service. The main purpose of a load balancer is to increase the capacity and reliability of a network service by distributing the workload across multiple servers. This allows the service to handle more requests and reduces the risk of a single server becoming a bottleneck or a point of failure.
+
+- There are two main types of load balancers: hardware-based and software-based. Hardware-based load balancers are physical devices that are installed in a network. They are typically more expensive than software-based load balancers, but they can handle a larger number of connections and can provide better performance. Software-based load balancers are implemented as software programs that run on a server or a virtual machine. They are typically less expensive than hardware-based load balancers, but they can be less efficient and may not be able to handle as many connections.
+
+Load balancers can be used for a variety of network services, including web servers, email servers, and databases. They are commonly used in web applications to distribute traffic across multiple web servers, which allows the application to handle more users and reduces the risk of a single web server becoming overloaded.
