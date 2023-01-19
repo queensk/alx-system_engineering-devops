@@ -32,7 +32,5 @@ backend servers
   server 85739-web-01 204.236.240.97:80 check
   server 85739-web-02 54.237.108.98:80 check
 ' > /etc/haproxy/haproxy.cfg
-
-# Start HAproxy
 systemctl start haproxy
 systemctl enable haproxy
