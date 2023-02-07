@@ -1,9 +1,9 @@
 #!/bin/bash
 # Command to make an nginx server listen on port 80
-sudo apt-get update
-sudo apt-get install nginx -y
-sudo ufw allow 'Nginx HTTP'
-sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
-sudo systemctl start nginx
-sudo systemctl enable nginx
-sudo lsof -i :80 | grep nginx > /dev/null
+apt-get update
+apt-get install nginx -y
+ufw allow 'Nginx HTTP'
+sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
+systemctl start nginx
+systemctl enable nginx
+lsof -i :80 | grep nginx > /dev/null
