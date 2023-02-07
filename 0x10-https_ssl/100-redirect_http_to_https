@@ -1,0 +1,39 @@
+global
+  log /dev/log local0
+  log /dev/log local1 notice
+  chroot /var/lib/haproxy
+  stats socket /run/haproxy/admin.sock mode 660 level admin
+  stats timeout 30s
+  user haproxy
+  group haproxy
+
+defaults
+  log global
+  mode http
+  option httplog
+  option dontlognull
+  timeout connect 5000
+  timeout client 50000
+  timeout server 50000
+
+frontend www
+  bind *:80
+  redirect scheme https code 301 if !{ ssl_fc }
+
+frontend www-https
+  bind *:443 ssl crt  /etc/ssl/www.clout0.tech/www.clout0.tech.pem
+  default_backend servers
+
+  # Let the letsencrypt backend handle requests to the
+  # acme-challenge url
+  acl letsencrypt-req path_beg /.well-known/acme-challenge/
+  use_backend letsencrypt if letsencrypt-req
+
+backend servers
+  balance roundrobin
+  server 85739-web-01 204.236.240.97:80 check
+  server 85739-web-02 52.87.220.158:80 check
+  #option httpchk
+
+backend letsencrypt
+   server letsencrypt 127.0.0.1:9785
