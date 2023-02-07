@@ -1,4 +1,4 @@
-#!/usr/bin/env /bash
+#!/usr/bin/env bash
 # Configures NGINX to run as user nginx instead of root
 
 # Kill nginx process in case it is currently running
