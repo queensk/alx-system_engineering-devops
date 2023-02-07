@@ -3,13 +3,10 @@
 #install nginx
 sudo apt-get update
 sudo apt-get install nginx -y
-
 sudo ufw allow 'Nginx HTTP'
 sudo sed -i 's/8080/80/g' /etc/nginx/sites-enabled/default
 #start nginx
 sudo systemctl start nginx
-
 sudo systemctl enable nginx
-
 # Check if Nginx is listening on port 80
 sudo lsof -i :80 | grep nginx > /dev/null
