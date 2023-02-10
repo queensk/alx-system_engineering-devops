@@ -29,26 +29,63 @@ sudo apt update
 Install the MySQL server package:
 
 ```
-sudo apt install mysql-server
+wget http://repo.mysql.com/mysql-apt-config_0.8.10-1_all.deb
 ```
 
-Start the MySQL service:
+Ubuntu bionic - Mysql server & cluster - mysql 5-7 - ok
 
 ```
-sudo service mysql start
+sudo dpkg -i mysql-apt-config_0.8.12-1_all.deb
 ```
 
-Secure the installation:
+Update the package index:
 
 ```
-sudo mysql_secure_installation
+sudo apt update
 ```
 
-Log in to the MySQL shell:
+If you see an error like this :
+
+GPG error: http://repo.mysql.com/apt/ubuntu bionic InRelease: The following signatures couldn't be verified because the public key is not available: NO_PUBKEY 467B942D3A79BD29
+
+Run this script :
 
 ```
-mysql -u root -p
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 467B942D3A79BD29
 ```
+
+replace this with the code from your error
+
+install mysql 5.7.\*
+
+```
+sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+```
+
+If you got an error again :
+dpkg: dependency problems prevent configuration of mysql-server:
+mysql-server depends on mysql-community-server (= 5.7.37-1ubuntu18.04); however:
+Package mysql-community-server is not configured yet.
+
+fix with this:
+vi /etc/apt/preferences.d/mysql
+
+Package: mysql-server
+Pin: version 5.7\*
+Pin-Priority: 1001
+
+Package: mysql-client
+Pin: version 5.7\*
+Pin-Priority: 1001
+
+Clean Setup again:
+apt-get remove mysql-client mysql-common mysql-community-client mysql-community-server mysql-server
+apt-get purge mysql-client mysql-common mysql-community-client mysql-community-server mysql-server
+
+apt-get update
+
+Install mysql again :
+sudo apt install -f mysql-client mysql-community-server mysql-server
 
 Repeat the above steps for web-02.example.com.
 
