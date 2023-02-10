@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-# MySQL backup
+# Backs up all SQL databases in a dump and packages them in an archive
 
-# Gate current date
-time=$(date +"%d-%m-%Y")
+# Backups SQL databases in a dump
 mysqldump -uroot -p'$1' --all-databases > backup.sql
 
-# create an archive
-sudo tar -cvzf "${time}.tar.gz backup.sql
+# Packages the backup dump into a .tar.gz
+sudo tar -cvzf $(date +"%d-%m-%y").tar.gz backup.sql
