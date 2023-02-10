@@ -2,8 +2,8 @@
 
 # MySQL backup
 # Gate current date
-NOW=$(date +'%d-%m-%y')
+time=$(date +"%d-%m-%Y")
 mysqldump -uroot -p'$1' --all-databases > backup.sql
 
 # create an archive
-sudo tar -cvzf '${NOW}.tar.gz' 'backup.sql'
+sudo tar -cvzf "${time}.tar.gz" 'backup.sql'
