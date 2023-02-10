@@ -1,0 +1,23 @@
+---
+- name: Install MySQL 5.7 on web-01 and web-02
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Add MySQL repository
+      apt_repository:
+        repo: deb http://repo.mysql.com/apt/ubuntu/ {{ansible_distribution_release}} mysql-5.7
+        state: present
+
+    - name: Install MySQL package
+      apt:
+        name: mysql-server
+        state: present
+        update_cache: yes
+        force: yes
+
+    - name: Start MySQL service
+      service:
+        name: mysql
+        state: started
+        enabled: yes
