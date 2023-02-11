@@ -5,31 +5,28 @@ their TODO list progress
 """
 
 import requests
-
-
-def get_todo_list_progress(employee_id):
-    url = f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}"
-    response = requests.get(url)
-    todos = response.json()
-
-    # Count number of completed tasks
-    completed_tasks = [task for task in todos if task['completed'] is True]
-    total_tasks = len(todos)
-    completed_task_count = len(completed_tasks)
-
-    # Get employee name
-    user_url = f"https://jsonplaceholder.typicode.com/users/{employee_id}"
-    user_response = requests.get(user_url)
-    employee_name = user_response.json()['name']
-
-    # Print results
-    print(
-        f"Employee {employee_name} is done with tasks({completed_task_count}/{total_tasks}):")
-    for task in completed_tasks:
-        print(f"\t{task['title']}")
-
+import sys
 
 if __name__ == "__main__":
-    import sys
-    employee_id = int(sys.argv[1])
-    get_todo_list_progress(employee_id)
+
+    userId = sys.argv[1]
+    user = requests.get("https://jsonplaceholder.typicode.com/users/{}"
+                        .format(userId))
+
+    name = user.json().get('name')
+
+    todos = requests.get('https://jsonplaceholder.typicode.com/todos')
+    totalTasks = 0
+    completed = 0
+
+    for task in todos.json():
+        if task.get('userId') == int(userId):
+            totalTasks += 1
+            if task.get('completed'):
+                completed += 1
+
+    print('Employee {} is done with tasks({}/{}):'
+          .format(name, completed, totalTasks))
+
+    print('\n'.join(["\t " + task.get('title') for task in todos.json()
+          if task.get('userId') == int(userId) and task.get('completed')]))
